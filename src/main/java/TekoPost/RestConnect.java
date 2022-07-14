@@ -16,22 +16,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class RestConnect {
-    public RestConnect() throws IOException {
-    }
+    private static final Path path = Path.of("/home/arcateon/IdeaProjects/Teko/src/main/java/TekoPost/jsons/payment.json");
 
     public static void connect() throws IOException {
-
         Response response = RestAssured.given()
                 .log().all()
                 .contentType(ContentType.JSON)
                 .header("Signature", dataJson())
-                .body(Files.readString(Path.of("/home/arcateon/IdeaProjects/Teko/src/main/java/TekoPost/jsons/payment.json")))
+                .body(Files.readString(Path.of(String.valueOf(path))))
                 .post("https://gate-test-02.teko.io/api/initiators/default/initPayment");
         response.then().log().all();
     }
 
     public static String dataJson() throws IOException {
-        byte[] data = Files.readAllBytes(Path.of("/home/arcateon/IdeaProjects/Teko/src/main/java/TekoPost/jsons/payment.json"));
+        byte[] data = Files.readAllBytes(Path.of(String.valueOf(path)));
         byte[] key = "TestSecret".getBytes();
         HmacUtils hm256 = new HmacUtils(HmacAlgorithms.HMAC_SHA_1, key);
         String hmac = Base64.encodeBase64String(hm256.hmac(data));
