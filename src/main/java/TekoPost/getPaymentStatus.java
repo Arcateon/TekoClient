@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class GetByTag {
+public class getPaymentStatus {
         private static final String path = "/home/arcateon/IdeaProjects/Teko/src/main/java/TekoPost/jsons/getPaymentsInfo.json";
         private static final String key = "TestSecret";
         private static final String url = "https://gate-test-02.teko.io/api/initiators/default/getPaymentsByTag";
